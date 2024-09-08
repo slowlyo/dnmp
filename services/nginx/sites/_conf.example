@@ -1,0 +1,25 @@
+server {
+    listen       80;
+    server_name  host.localed.top;
+    root   /www/dir/public;
+    index  index.php index.html index.htm;
+    
+    access_log /dev/null;
+    error_log  /var/log/nginx/host.localed.top.error.log  warn;
+    
+    # laravel
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    location ~ [^/]\.php(/|$) {
+        fastcgi_pass   php:9000;
+        include        fastcgi-php.conf;
+        include        fastcgi_params;
+    }
+}
