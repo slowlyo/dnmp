@@ -14,7 +14,7 @@ DNMP（Docker + Nginx/Openresty + MySQL5,8 + PHP5,7,8 + Redis + ElasticSearch + 
 7. 内置**完整PHP扩展安装**命令
 8. 默认支持`pdo_mysql`、`mysqli`、`mbstring`、`gd`、`curl`、`opcache`等常用热门扩展，根据环境灵活配置
 9. 可一键选配常用服务：
-    - 多PHP版本：PHP5.4、PHP5.6、PHP7.0-7.4、PHP8.0
+    - 多PHP版本PHP5.6、PHP7.0-7.4、PHP8.0、PHP8.2
     - Web服务：Nginx、Openresty
     - 数据库：MySQL5、MySQL8、Redis、memcached、MongoDB、ElasticSearch
     - 消息队列：RabbitMQ
