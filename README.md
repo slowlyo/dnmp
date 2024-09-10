@@ -2,6 +2,13 @@
 > - 调整:
 >     - 移除 php 5.4
 
+<br>
+
+***
+
+<br>
+<br>
+
 DNMP（Docker + Nginx/Openresty + MySQL5,8 + PHP5,7,8 + Redis + ElasticSearch + MongoDB + RabbitMQ）是一款全功能的*
 *LNMP一键安装程序，支持Arm CPU**。
 
