@@ -17,7 +17,21 @@ php () {
         --rm \
         --volume $PWD:/www:rw \
         --workdir /www \
-        php:7.4-cli php "$@"
+        dnmp-php php "$@"
+}
+
+composer () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --user www-data:www-data \
+        --volume ~/dnmp/data/compser:/tmp/composer \
+        --volume $PWD:/www \
+        --workdir /www \
+        dnmp-php composer "$@"
 }
 
 php80 () {
@@ -29,7 +43,21 @@ php80 () {
         --rm \
         --volume $PWD:/www:rw \
         --workdir /www \
-        php:8.0-cli php "$@"
+        dnmp-php80 php "$@"
+}
+
+composer80 () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --user www-data:www-data \
+        --volume ~/dnmp/data/compser:/tmp/composer \
+        --volume $PWD:/www \
+        --workdir /www \
+        dnmp-php80 composer "$@"
 }
 
 php82 () {
@@ -41,7 +69,21 @@ php82 () {
         --rm \
         --volume $PWD:/www:rw \
         --workdir /www \
-        php:8.2-cli php "$@"
+        dnmp-php82 php "$@"
+}
+
+composer82 () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --user www-data:www-data \
+        --volume ~/dnmp/data/compser:/tmp/composer \
+        --volume $PWD:/www \
+        --workdir /www \
+        dnmp-php82 composer "$@"
 }
 
 # docker
