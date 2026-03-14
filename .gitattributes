@@ -1,5 +1,6 @@
 * text eol=lf
 
+php-cli/php80-cli binary
 *.png binary
 *.jpg binary
 *.tgz binary
