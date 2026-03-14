@@ -6,4 +6,4 @@ docker-compose.yml
 www/*
 !www/localhost/
 logs/*
-services/nginx/sites/*.conf
+services/nginx/conf.d/*.conf
