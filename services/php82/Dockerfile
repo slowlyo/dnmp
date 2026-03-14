@@ -29,9 +29,10 @@ RUN apk add gnu-libiconv libstdc++ --no-cache --repository http://${CONTAINER_PA
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
-# 安装 composer，并关闭 HTTP/2 避免镜像源偶发流错误
-RUN curl --http1.1 --retry 5 --retry-delay 2 --retry-all-errors -fLo /usr/bin/composer https://${COMPOSER_URL}/composer/composer.phar \
-    && chmod +x /usr/bin/composer
+# 使用官方安装器安装 composer，避免镜像直链下载中途断流
+RUN curl --http1.1 --retry 5 --retry-delay 2 --retry-all-errors -fsSL https://getcomposer.org/installer -o /tmp/composer-setup.php \
+    && php /tmp/composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && rm -f /tmp/composer-setup.php
 ENV COMPOSER_HOME=/tmp/composer
 
 # php image's www-data user uid & gid are 82, change them to 1000 (primary user)
