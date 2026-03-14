@@ -16,14 +16,14 @@ DNMP Project Features:
 
 1.  `100%`open source
 2.  `100%`Follow docker standards
-3.  backing**Multiple versions of PHP**Coexistence, can be switched arbitrarily (PHP5.4, PHP5.6, PHP7.1, PHP7.2, PHP7.3, PHP7.4, PHP8.0)
+3.  backing**Multiple versions of PHP**Coexistence, can be switched arbitrarily (PHP5.6, PHP7.1, PHP7.2, PHP7.3, PHP7.4, PHP8.0, PHP8.2)
 4.  Binding is supported**Any number of domain names**
 5.  backing**HTTPS and HTTP/2**
 6.  **PHP source code, MySQL data, configuration files, log files**All can be directly modified in Host
 7.  Built**Full PHP extension installation**command
 8.  Supported by default`pdo_mysql`、`mysqli`、`mbstring`、`gd`、`curl`、`opcache`and other commonly used and popular extensions, flexibly configured according to the environment
 9.  One-click selection of common services:
-    *   Multiple PHP versions: PHP5.4, PHP5.6, PHP7.0-7.4, PHP8.0
+    *   Multiple PHP versions: PHP5.6, PHP7.0-7.4, PHP8.0, PHP8.2
     *   Web services: Nginx, Openresty
     *   Databases: MySQL5, MySQL8, Redis, memcached, MongoDB, ElasticSearch
     *   Message Queuing: RabbitMQ
@@ -75,7 +75,6 @@ DNMP Project Features:
     │   ├── mysql5                  MySQL5 配置文件目录
     │   ├── nginx                   Nginx 配置文件目录
     │   ├── php                     PHP5.6 - PHP7.4 配置目录
-    │   ├── php54                   PHP5.4 配置目录
     │   └── redis                   Redis 配置目录
     ├── logs                        日志目录
     ├── docker-compose.sample.yml   Docker 服务配置示例文件
@@ -99,7 +98,7 @@ DNMP Project Features:
         $ cp env.sample .env                                # 复制环境变量文件
         $ cp docker-compose.sample.yml docker-compose.yml   # 复制 docker-compose 配置文件。默认启动3个服务：
                                                             # Nginx、PHP7和MySQL8。要开启更多其他服务，如Redis、
-                                                            # PHP5.6、PHP5.4、MongoDB，ElasticSearch等，请删
+                                                            # PHP5.6、MongoDB，ElasticSearch等，请删
                                                             # 除服务块前的注释
         $ docker-compose up                                 # 启动
 5.  Access in a browser:`http://localhost`or`https://localhost`(Self-signed HTTPS demo) can see the effect of PHP code in the file`./www/localhost/index.php`。
@@ -108,17 +107,17 @@ DNMP Project Features:
 
 ### 3.1 Switch the PHP version used by Nginx
 
-First, you need to start another version of PHP, such as PHP 5.4, so that's the first step`docker-compose.yml`Delete the comments that preceded PHP5.4 from the file and start the PHP5.4 container.
+First, you need to start another version of PHP, such as PHP 8.0. Enable the target PHP service in `docker-compose.yml` and start the container.
 
-After PHP5.4 starts, open Nginx Configuration and modify it`fastcgi_pass`The host address of the company, by `php`to`php54`As follows:
+After PHP8.0 starts, open Nginx Configuration and modify `fastcgi_pass` from `php` to `php80` as follows:
 
         fastcgi_pass   php:9000;
 
 For:
 
-        fastcgi_pass   php54:9000;
+        fastcgi_pass   php80:9000;
 
-thereinto `php` and `php54` be`docker-compose.yml`The name of the server in the file.
+thereinto `php` and `php80` be`docker-compose.yml`The name of the server in the file.
 
 At last**Reboot Nginx** Take effect.
 
@@ -137,7 +136,7 @@ Add the required PHP extensions:
 
 ```bash
 PHP_EXTENSIONS=pdo_mysql,opcache,redis       # PHP 要安装的扩展列表，英文逗号隔开
-PHP54_EXTENSIONS=opcache,redis                 # PHP 5.4要安装的扩展列表，英文逗号隔开
+PHP80_EXTENSIONS=opcache,redis                 # PHP 8.0要安装的扩展列表，英文逗号隔开
 ```
 
 Then re-build the PHP image.
@@ -398,7 +397,6 @@ Then, open`~/.bashrc`or`~/.zshrc`file, plus:
 alias dnginx='docker exec -it nginx /bin/sh'
 alias dphp='docker exec -it php /bin/sh'
 alias dphp56='docker exec -it php56 /bin/sh'
-alias dphp54='docker exec -it php54 /bin/sh'
 alias dmysql='docker exec -it mysql /bin/bash'
 alias dredis='docker exec -it redis /bin/sh'
 ```

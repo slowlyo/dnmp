@@ -14,7 +14,7 @@ DNMP（Docker + Nginx/Openresty + MySQL5,8 + PHP5,7,8 + Redis + ElasticSearch + 
 
 1. `100%`开源
 2. `100%`遵循Docker标准
-3. 支持**多版本PHP**共存，可任意切换（PHP5.4、PHP5.6、PHP7.1、PHP7.2、PHP7.3、PHP7.4、PHP8.0)
+3. 支持**多版本PHP**共存，可任意切换（PHP5.6、PHP7.1、PHP7.2、PHP7.3、PHP7.4、PHP8.0、PHP8.2)
 4. 支持绑定**任意多个域名**
 5. 支持**HTTPS和HTTP/2**
 6. **PHP源代码、MySQL数据、配置文件、日志文件**都可在Host中直接修改查看
@@ -74,7 +74,6 @@ DNMP（Docker + Nginx/Openresty + MySQL5,8 + PHP5,7,8 + Redis + ElasticSearch + 
 │   ├── mysql5                  MySQL5 配置文件目录
 │   ├── nginx                   Nginx 配置文件目录
 │   ├── php                     PHP5.6 - PHP7.4 配置目录
-│   ├── php54                   PHP5.4 配置目录
 │   └── redis                   Redis 配置目录
 ├── logs                        日志目录
 ├── docker-compose.yml.example  Docker 服务配置示例文件
@@ -104,7 +103,7 @@ DNMP（Docker + Nginx/Openresty + MySQL5,8 + PHP5,7,8 + Redis + ElasticSearch + 
     $ cp env.sample .env                                # 复制环境变量文件
     $ cp docker-compose.sample.yml docker-compose.yml   # 复制 docker-compose 配置文件。默认启动3个服务：
                                                         # Nginx、PHP7和MySQL8。要开启更多其他服务，如Redis、
-                                                        # PHP5.6、PHP5.4、MongoDB，ElasticSearch等，请删
+                                                        # PHP5.6、MongoDB，ElasticSearch等，请删
                                                         # 除服务块前的注释
     $ docker-compose up                                 # 启动
     ```
@@ -115,9 +114,9 @@ DNMP（Docker + Nginx/Openresty + MySQL5,8 + PHP5,7,8 + Redis + ElasticSearch + 
 
 ### 3.1 切换Nginx使用的PHP版本
 
-首先，需要启动其他版本的PHP，比如PHP8.0，那就先在`docker-compose.yml`文件中删除PHP5.4前面的注释，再启动PHP5.4容器。
+首先，需要启动其他版本的PHP，比如PHP8.0，那就先在`docker-compose.yml`文件中启用对应 PHP 服务。
 
-PHP5.4启动后，打开Nginx 配置，修改`fastcgi_pass`的主机地址，由`php`改为`php80`，如下：
+PHP8.0 启动后，打开Nginx 配置，修改`fastcgi_pass`的主机地址，由`php`改为`php80`，如下：
 
 ```
     fastcgi_pass   php:9000;
@@ -437,7 +436,6 @@ $ docker ps -a        # 所有容器
 alias dnginx='docker exec -it nginx /bin/sh'
 alias dphp='docker exec -it php /bin/sh'
 alias dphp56='docker exec -it php56 /bin/sh'
-alias dphp54='docker exec -it php54 /bin/sh'
 alias dmysql='docker exec -it mysql /bin/bash'
 alias dredis='docker exec -it redis /bin/sh'
 ```
