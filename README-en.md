@@ -5,7 +5,7 @@ Docker deploying Nginx MySQL PHP7/PHP5.6/PHP8 in one key, support full feature f
 
 ## 1. Feature
 1. Completely open source.
-2. Support Multiple PHP version(PHP5.6, PHP7.0, PHP7.1, PHP7.2, PHP7.3, PHP7.4, PHP8.0, PHP8.2) switch.
+2. Support Multiple PHP version(PHP5.6, PHP7.0, PHP7.1, PHP7.2, PHP7.3, PHP7.4, PHP8.0, PHP8.2, PHP8.4) switch.
 3. Support Multiple domains.
 4. Support HTTPS and HTTP/2.
 5. PHP source located in host.
@@ -35,8 +35,6 @@ Docker deploying Nginx MySQL PHP7/PHP5.6/PHP8 in one key, support full feature f
     ```
 5. Go to your browser and type `http://localhost`, you will see:
 
-![Demo Image](./snapshot.png)
-
 The index file is located at `./www/localhost/index.php`.
 
 
@@ -49,9 +47,9 @@ For example, [http://localhost](http://localhost) use PHP7, Nginx `fastcgi_pass`
 ```
     fastcgi_pass   php:9000;
 ```
-To use PHP8.0, change it:
+To use PHP8.4, change it:
 ```
-    fastcgi_pass   php80:9000;
+    fastcgi_pass   php84:9000;
 ```
 Then reload nginx:
 ```bash

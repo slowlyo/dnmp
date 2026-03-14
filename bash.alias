@@ -3,6 +3,7 @@ alias dnginx='docker exec -it nginx /bin/sh'
 alias dphp='docker exec -it php /bin/sh'
 alias dphp80='docker exec -it php80 /bin/sh'
 alias dphp82='docker exec -it php82 /bin/sh'
+alias dphp84='docker exec -it php84 /bin/sh'
 alias dphp56='docker exec -it php56 /bin/sh'
 alias dmysql='docker exec -it mysql /bin/bash'
 alias dredis='docker exec -it redis /bin/sh'
@@ -84,6 +85,32 @@ composer82 () {
         --volume $PWD:/www \
         --workdir /www \
         dnmp-php82 composer "$@"
+}
+
+php84 () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --volume $PWD:/www:rw \
+        --workdir /www \
+        dnmp-php84 php "$@"
+}
+
+composer84 () {
+    tty=
+    tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --user www-data:www-data \
+        --volume ~/dnmp/data/compser:/tmp/composer \
+        --volume $PWD:/www \
+        --workdir /www \
+        dnmp-php84 composer "$@"
 }
 
 # docker
