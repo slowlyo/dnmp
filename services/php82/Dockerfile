@@ -29,8 +29,8 @@ RUN apk add gnu-libiconv libstdc++ --no-cache --repository http://${CONTAINER_PA
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
-# Install composer and change it's cache home
-RUN curl -o /usr/bin/composer https://${COMPOSER_URL}/composer/composer.phar \
+# 安装 composer，并关闭 HTTP/2 避免镜像源偶发流错误
+RUN curl --http1.1 --retry 5 --retry-delay 2 --retry-all-errors -fLo /usr/bin/composer https://${COMPOSER_URL}/composer/composer.phar \
     && chmod +x /usr/bin/composer
 ENV COMPOSER_HOME=/tmp/composer
 
