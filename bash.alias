@@ -133,3 +133,9 @@ dsize () {
 
     du -h --max-depth=$level
 }
+
+fixperm() {
+  xattr -dr com.apple.quarantine "$1"
+  chmod +x "$1"
+  echo "✅ 已解锁并赋予执行权限: $1"
+}
